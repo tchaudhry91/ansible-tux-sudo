@@ -1,0 +1,15 @@
+- name: Add certbot repo
+  apt_repository:
+    repo: "ppa:certbot/certbot"
+    state: present
+
+- name: APT-Update
+  apt:
+    update_cache: yes
+
+- name: Install Certbot
+  apt:
+    name: certbot
+
+- name: Grab Certificate
+  command: certbot certonly --standalone -d tux-sudo.com -d www.tux-sudo.com
