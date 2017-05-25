@@ -1,0 +1,17 @@
+---
+
+users:
+  - username: "tchaudhry"
+    uid: "1010"
+
+  - username: "ghost"
+    uid: "1011"
+
+base_packages:
+  - 'apt-transport-https'
+  - 'ca-certificates'
+  - 'curl'
+  - 'software-properties-common'
+  - 'git'
+  - 'zsh'
+  - 'python-pip'

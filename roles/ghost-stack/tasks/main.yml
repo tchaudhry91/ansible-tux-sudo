@@ -1,0 +1,26 @@
+---
+
+- name: Create App directory
+  file:
+    path: /var/lib/tux-sudo
+    state: directory
+    mode: 0755
+
+- name: Add stack config to instance
+  copy:
+    src: files/docker-compose.yml
+    dest: /var/lib/tux-sudo/docker-compose.yml
+    owner: ghost
+    mode: 0644
+
+- name: Add config files
+  copy:
+    src: files/config
+    dest: /var/lib/tux-sudo
+
+- name: Bring Up Docker Services
+  command: docker-compose up -d
+  async: 1800
+  poll: 5
+  args:
+    chdir: /var/lib/tux-sudo

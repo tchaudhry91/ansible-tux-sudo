@@ -1,0 +1,14 @@
+---
+
+- name: Create Users, Install Docker, Deploy Stack
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+
+  roles:
+      - base
+      - docker
+      - users
+#     - ssl_certificate
+      - ghost-stack

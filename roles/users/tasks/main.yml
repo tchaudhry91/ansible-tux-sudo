@@ -1,0 +1,21 @@
+---
+
+# Add the users with specific uid
+
+- name: Add Several users
+  user:
+    name: "{{ item.username }}"
+    state: present
+    groups: sudo,docker
+    shell: /bin/zsh
+    uid: "{{ item.uid}}"
+  with_items:
+    - "{{ users }}"
+
+- name: Add SSH Keys to users
+  authorized_key:
+    user: "{{ item.username }}"
+    state: present
+    key: "{{ lookup('file', 'files/{{item.username}}') }}"
+  with_items: 
+    - "{{ users }}"

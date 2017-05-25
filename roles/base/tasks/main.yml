@@ -1,0 +1,11 @@
+---
+
+- name: Update APT
+  apt:
+    update_cache: yes
+
+- name: Install Packages
+  apt : 
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ base_packages }}"
