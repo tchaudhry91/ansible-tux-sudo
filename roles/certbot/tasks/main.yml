@@ -13,3 +13,13 @@
 
 - name: Grab Certificate
   command: certbot certonly --standalone -d tux-sudo.com --agree-tos --non-interactive --email tanmay.chaudhry@gmail.com
+  args:
+    creates: /var/lib/tux-sudo/certbot_tux_sudo_done
+
+- name: Install Cron
+  cron:
+    name: Certbot renew Certificate every month
+    minute: 0
+    hour: 0
+    day: 15
+    job: "certbot renew"

@@ -11,4 +11,4 @@
       - docker
       - users
       - certbot
-        # - ghost-stack
+      - ghost-stack
