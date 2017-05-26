@@ -1,0 +1,24 @@
+---
+
+- name: Create backup directory
+  file:
+    path: /var/lib/tux-sudo/backup
+    state: directory
+    mode: 0755
+
+- name: Copy config
+  copy:
+    src: files/{{ item }}
+    dest: /var/lib/tux-sudo/backup/
+    owner: ghost
+    mode: 0755
+  with_items:
+    - lifecycle.json
+    - tar_and_upload.sh
+
+- name: Cron backup script
+  cron:
+    name: Daily Backup of Blog
+    minute: 0
+    hour: 1
+    job: /var/lib/tux-sudo/backup/tar_and_upload.sh {{ gstorage_bucket_url }}

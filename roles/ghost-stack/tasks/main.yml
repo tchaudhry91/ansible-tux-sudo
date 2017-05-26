@@ -24,3 +24,13 @@
   poll: 5
   args:
     chdir: /var/lib/tux-sudo
+
+- name: Inject ghost-config
+  command: docker cp /var/lib/tux-sudo/config/config.js tux-sudo-ghost:/var/lib/ghost/config.js
+
+- name: Restart ghost stack
+  command: docker-compose restart 
+  async: 1800
+  poll: 5
+  args:
+    chdir: /var/lib/tux-sudo
